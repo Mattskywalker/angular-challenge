@@ -1,0 +1,53 @@
+@forward './styles/typography.scss';
+@forward './styles/buttons.scss';
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('/assets/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: url('/assets/fonts/Exo-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --font-main: 'OpenSans', sans-serif;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: #e7eef1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  // display: flex;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: all ease-in-out 300ms;
+}
