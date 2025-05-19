@@ -1,0 +1,33 @@
+<div class="page-container">
+  <nav class="menu">
+    <div class="logo-container">
+      <img src="../../assets/icons/ailos-logo.svg" width="60px" />
+    </div>
+
+    <button class="burger-button">
+      <mat-icon class="burger material-icons-round">menu</mat-icon>
+    </button>
+
+    <button *ngFor="let icon of iconList" class="menu-button">
+      <mat-icon class="icon material-icons-round">{{ icon }}</mat-icon>
+    </button>
+  </nav>
+  <section>
+    <header>
+      <div>
+        <h1 class="heading1">Nova admissão cooperado</h1>
+        <p class="caption">
+          Cadastro / Admissão do Cooperado / Nova Admissão de Cooperado
+        </p>
+      </div>
+      <span></span>
+      <mat-icon>notifications</mat-icon>
+      <button>VIACREDI</button>
+    </header>
+    <main>
+      mainContent
+      <ng-content></ng-content>
+    </main>
+    <footer>asadaaaaaaaaaaaa</footer>
+  </section>
+</div>
