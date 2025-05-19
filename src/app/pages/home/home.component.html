@@ -1,3 +1,43 @@
-<p>
-  home works!
-</p>
+<layout>
+  <div>
+    <input placeholder="pesquisar CPF" [(ngModel)]="inputCpf" />
+    <button (click)="searchCustomer()">Buscar</button>
+  </div>
+  <p *ngIf="showError" class="error-caption">Cooperado não encontrado</p>
+
+  <div class="card-container">
+    <simple-card
+      *ngIf="customer"
+      title="Situação cadastral do CPF"
+      subtitle="Consulta na receita federal"
+    >
+      <info-item
+        icon="person"
+        iconColor="#889499"
+        info="{{ this.customer.name }}"
+        label="Nome"
+      ></info-item>
+      <info-item
+        icon="check_circle_outline"
+        iconColor="#00C246"
+        info="{{ registrationStatus }}"
+        label="Nome"
+      ></info-item>
+    </simple-card>
+
+    <simple-card
+      *ngFor="let account of customer.accountList"
+      [title]="getAccountLabel(account.type)"
+      subtitle="{{ account.institution }}"
+    >
+      <info-item
+        icon="credit_card"
+        iconColor="#889499"
+        info="{{ account.accountNumber }}"
+        label="Número da conta"
+      ></info-item>
+
+      <Button class="tertiary p">Duplicar conta</Button>
+    </simple-card>
+  </div>
+</layout>
