@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="icon-container" *ngIf="icon">
+    <mat-icon [ngStyle]="{ color: iconColor || 'black' }">
+      {{ icon }}
+    </mat-icon>
+  </div>
+  <div class="info-container">
+    <p class="caption">{{ label }}</p>
+    <p class="heading3 light">{{ info }}</p>
+  </div>
+</div>
