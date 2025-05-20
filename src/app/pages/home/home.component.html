@@ -1,11 +1,18 @@
 <layout>
+  <ailos-label
+    class="title"
+    subtitle="Se necessário, você poderá duplicar uma conta existente ou pausar e retomar este cadastro futuramente.
+              Digite apenas os números (sem pontos ou traços)."
+  >
+    Informe o CPF do futuro cooperado (a)
+  </ailos-label>
   <form class="search-form" [formGroup]="cpfForm" (ngSubmit)="searchCustomer()">
     <ailos-input
       (input)="handleInput()"
       [style]="{ width: '270px' }"
       [maxLength]="14"
       label="CPF"
-      placeholder="Pequisar CPF"
+      placeholder="000.000.000-00"
       formControlName="cpf"
       [error]="(cpfForm.get('cpf').invalid && cpfForm.get('cpf').touched) || showError"
       [auxiliaryText]="getErrorText('cpf')"
