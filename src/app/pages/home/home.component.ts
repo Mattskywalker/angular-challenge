@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService, Customer } from 'src/app/core/services/customer.service';
 import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { CustomerDataService } from 'src/app/core/services/customer-data.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private customerDataService: CustomerDataService
   ) {}
 
   ngOnInit() {
@@ -105,6 +107,7 @@ export class HomeComponent implements OnInit {
         next: (customer) => {
           this.customer = customer;
           this.showError = false;
+          this.customerDataService.updateData(customer);
         },
         error: (e) => {
           console.error('Erro ', e);
