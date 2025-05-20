@@ -12,20 +12,49 @@
   }
 }
 
+.primary {
+  cursor: pointer;
+  font-family: 'OpenSans', sans-serif;
+  font-size: 1.4rem;
+  line-height: 100%;
+  color: white;
+  width: fit-content;
+  height: 3.2rem;
+  background-color: $ailos_blue;
+  border-radius: 0.2rem;
+
+  &:focus {
+    border: 1px solid $ailos-light-blue;
+    border-radius: 0.2rem;
+  }
+
+  &:disabled {
+    border: none;
+  }
+
+  &:active {
+    background-color: $ailos_blue_120 !important;
+    border-color: $ailos_blue_120;
+  }
+
+  &:hover {
+    background-color: $ailos_blue_dark;
+  }
+}
+
 .tertiary {
   cursor: pointer;
   font-family: 'OpenSans', sans-serif;
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 100%;
-  letter-spacing: 0%;
   color: $primary;
   width: fit-content;
   height: 3.2rem;
+  border-radius: 0.2rem;
 
   &:focus {
     border: 1px solid $ailos_blue;
-    border-radius: 0.2rem;
   }
 
   &:disabled {
