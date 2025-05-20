@@ -1,50 +1,92 @@
-# AngularChallenge
+# Angular Challenge 🚀
 
-Angular 7
+## 💡 Descrição
 
-na primeira página teremos um formulário para consulta de CPF, essa consulta
-deverá ter a possibilidade de dois caminhos, o de insucesso, onde o CPF inserido não é valido, gerando uma mensagem de erro na tela, e o feliz, onde
-o CPF é localizado e o usuário direcionado a tela dois. Na “tela dois”, após ser inserido um CPF válido no formulário, deverá carregar os dados do cooperado.
-Importante seguir o modelo de interface que segue abaixo
+Este projeto é uma aplicação em **Angular 7** que simula uma consulta de CPF para exibição de dados de cooperados. A aplicação segue dois fluxos principais:
 
-## Caminho de insucesso (Caminho infeliz) 😢
+- **Fluxo de sucesso (😄)**: Quando o CPF informado é válido e está cadastrado na base de dados, o usuário é redirecionado para uma segunda tela com os dados do cooperado.
+- **Fluxo de erro (😢)**: Quando o CPF é inválido ou não encontrado, mensagens apropriadas são exibidas.
 
-Escrever um CPF Invalido no campo, por exemplo: 111.111.111-11
-deverá receber uma mensagem de CPF não é válido
-assim como outras mensagens de validação, required, lenght.
+---
 
-Escrever um CPF Válido mas o mesmo não existir na base de Dados
-deverá receber uma mensagem de "Coperado não encontrado."
+## 📄 Requisitos Funcionais
 
-## Caminho de sucesso (Caminho feliz) 😄
+### ❌ Caminho de Insucesso (Infeliz)
 
-Escrever um CPF válido no campo que esteja cadastrado na base de dados
-438.265.920-50 - EU 😄
-881.628.750-00 - Mariane de Souza Oliveira (que tava na tela)
+- Inserir um CPF inválido (ex: `111.111.111-11`) deve exibir a mensagem:
+  ```
+  O CPF digitado não é válido
+  ```
+- Validações de formulário devem funcionar corretamente (ex: `required`, `minLength`, `maxLength`, `pattern`).
+- Inserir um CPF válido que **não exista** na base de dados deve exibir a mensagem:
+  ```
+  Cooperado não encontrado
+  ```
 
-assim o resultado esperado é que renderize os dados do cooperado e as contas conforme as telas do figma
+### ✅ Caminho de Sucesso (Feliz)
 
-## Como rodar???
+- Inserir um CPF válido **e existente** deve redirecionar o usuário à segunda tela com os dados do cooperado.
 
-Estou usando angular 7, e Node para a api, tudo ta rodando com a versão `v16.20.2` do node
-Achei que seria interessante ter uma API para consumo de dados, coloquei aqui mesmo dentro do projeto, para facilitar
+#### CPFs cadastrados de exemplo:
 
-Para inciar a api basta rodar `npm run start-api` só basta isso, já vai instalar as dependencias e funcionar normal
-A api roda na `http://localhost:3000`
+- `438.265.920-50` — Meu CPF 😄
+- `881.628.750-00` — Mariane de Souza Oliveira (a mesma exibida no figma)
 
-Para iniciar o front basta rodar o `ng serve`
-o endereço é o `http://localhost:4200/` redirecionei todas as rotas para a `home`
-só entrar que ja vai para a tela inicial
+---
 
-## Problemas ⚠️⚠️⚠️⚠️⚠️
+## ▶️ Como Rodar o Projeto
 
-Não cosnegui os icones da barra de navegação e alguns icones que estão na tela do desafio
-então usei o material icons mesmo
+### Requisitos
 
-não consegui rodar os testes, acredito que seja por
-algum B.O de incompatibilidade de versões do karma webpack e do jasmine
+- **Node.js** `v16.20.2`
+- **Angular CLI** compatível com Angular 7
 
-## Observações
+### Backend (API)
 
-muitos itens estão na tela para seguir o design, os botões de notificação, da barra de navegação... ETC
-mas quanto a todo fluxo de CPF que foi pedido no desafio ta 100% ✅
+A API está incluída no próprio projeto. Para executá-la:
+
+```bash
+npm run start-api
+```
+
+A API estará disponível em:
+
+```
+http://localhost:3000
+```
+
+---
+
+### Frontend (Angular)
+
+Para rodar o frontend:
+
+```bash
+ng serve
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:4200/
+```
+
+> Todas as rotas são redirecionadas automaticamente para a página **Home**.
+
+---
+
+## ⚠️ Problemas Conhecidos
+
+- Os ícones da interface (barra de navegação, ações, etc.) foram substituídos por **Material Icons**, pois os originais do Figma não estavam acessíveis.
+- Os testes unitários **não estão executando corretamente**, possivelmente devido a incompatibilidades entre versões do Karma, Webpack e Jasmine.
+
+---
+
+## 📝 Observações
+
+- Os componentes visuais da interface (como botões e menus) foram incluídos para manter a fidelidade ao design proposto no Figma.
+- Toda a lógica de validação e fluxo de CPF está **100% implementada e funcional** ✅
+
+---
+
+Desenvolvido com 💙 por Mateus Martins
