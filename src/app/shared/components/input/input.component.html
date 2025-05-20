@@ -1,0 +1,14 @@
+<div [ngClass]="{ error: error }">
+  <p *ngIf="label" class="label">{{ label }}</p>
+  <input
+    [maxLength]="maxLength"
+    [ngStyle]="styles"
+    [ngClass]="{ 'text-field': true }"
+    [placeholder]="placeholder"
+    #inputRef
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+  />
+  <p [ngClass]="{ 'aux-text': true }">{{ auxiliaryText }}</p>
+</div>

@@ -1,0 +1,42 @@
+@use 'palette' as *;
+
+.label {
+  margin-bottom: 0.6rem;
+  margin-bottom: 9px;
+}
+
+.text-field {
+  padding-left: 8px;
+  padding-right: 12px;
+  font-family: 'OpenSans';
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #889499;
+  border-radius: 2px;
+  height: 3.2rem;
+
+  &::placeholder {
+    color: #889499;
+  }
+
+  &:focus {
+    border-color: $ailos_blue;
+  }
+}
+
+.aux-text {
+  margin-top: 0.3rem;
+  position: absolute;
+}
+
+.error {
+  position: relative;
+
+  > .aux-text {
+    color: red;
+  }
+
+  > .text-field {
+    border-color: red;
+  }
+}
