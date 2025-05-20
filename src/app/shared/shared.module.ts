@@ -4,11 +4,17 @@ import { InputComponent } from './components/input/input.component';
 import { SimpleCardComponent } from './components/simple-card/simple-card.component';
 import { MatIconModule } from '@angular/material';
 import { InfoItemComponent } from './components/info-item/info-item.component';
-import { ComponentsComponent } from './components/components.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
-  declarations: [InputComponent, SimpleCardComponent, InfoItemComponent, ComponentsComponent],
+  declarations: [
+    InputComponent,
+    SimpleCardComponent,
+    InfoItemComponent,
+    InputComponent,
+    ButtonComponent,
+  ],
   imports: [CommonModule, MatIconModule],
-  exports: [SimpleCardComponent, InfoItemComponent],
+  exports: [SimpleCardComponent, InfoItemComponent, InputComponent, ButtonComponent],
 })
 export class SharedModule {}
