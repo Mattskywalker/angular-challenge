@@ -4,9 +4,10 @@ import { LayoutComponent } from './layout.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, HeaderComponent],
   imports: [CommonModule, FormsModule, MatIconModule, SharedModule],
   exports: [LayoutComponent],
 })
