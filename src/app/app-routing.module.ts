@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'not-found',
     loadChildren: './pages/not-found/not-found.module#NotFoundModule',
   },
-  { path: '**', redirectTo: 'not-found' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
