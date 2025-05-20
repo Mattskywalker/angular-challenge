@@ -24,6 +24,10 @@ export class ButtonComponent implements OnInit {
   @Input() type: 'submit' | 'button' | 'reset' = 'button';
   @Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
   @Input() size: 'p' | 'm' = 'm';
+  @Input() rounded: boolean = false;
+  @Input() fontFamily: 'primary' | 'secondary' = 'primary';
+
+  ngClassObject: { [key: string]: boolean };
 
   className: string;
 
@@ -31,5 +35,11 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit() {
     this.className = `${this.variant} ${this.size}`;
+    this.ngClassObject = {
+      rounded: this.rounded,
+      'main-button': true,
+      [this.className]: true,
+      [`font-${this.fontFamily}`]: true,
+    };
   }
 }

@@ -1,3 +1,18 @@
+.font-secondary {
+  > p {
+    margin-top: 1px;
+  }
+  font-family: 'Exo';
+}
+
+.font-primary {
+  font-family: 'OpenSans';
+}
+
+.rounded {
+  border-radius: 1.5rem;
+}
+
 .hidden {
   visibility: hidden;
 }
