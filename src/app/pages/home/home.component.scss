@@ -1,5 +1,13 @@
 @use 'palette' as *;
 
+.stepper-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 11.2rem;
+}
+
 .person-icon {
   color: $gray;
 }
@@ -10,6 +18,7 @@
 
 .card-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.6rem;
 }
 

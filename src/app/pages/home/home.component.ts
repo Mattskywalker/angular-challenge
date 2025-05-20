@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  CustomerService,
-  Customer,
-  RegistrationStatus,
-} from 'src/app/core/services/customer.service';
+import { CustomerService, Customer } from 'src/app/core/services/customer.service';
 import { finalize } from 'rxjs/operators';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomerDataService } from 'src/app/core/services/customer-data.service';
+import { StepProps } from 'src/app/shared/components/stepper/stepper.component';
+import { HomeFormService } from './home-form.service';
+import { applyMask } from 'src/app/core/utils/cpfUtil';
+import {
+  getStatusIcon,
+  RegistrationStatusLabels,
+} from 'src/app/core/utils/accountStatusUtil';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +19,9 @@ import { CustomerDataService } from 'src/app/core/services/customer-data.service
 export class HomeComponent implements OnInit {
   customer: Customer;
 
+  stepList: StepProps[];
+  currentStep: number;
+
   showError: boolean = false;
   loading: boolean = false;
 
@@ -23,31 +29,24 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private formBuilder: FormBuilder,
+    private homeFormService: HomeFormService,
     private customerDataService: CustomerDataService
-  ) {}
+  ) {
+    this.currentStep = 1;
+    this.stepList = [
+      { label: 'Início' },
+      { label: 'Documentos' },
+      { label: 'Dados cadastrais' },
+      { label: 'Admissão' },
+    ];
+  }
 
   ngOnInit() {
-    this.cpfForm = this.formBuilder.group({
-      cpf: ['', [Validators.required, Validators.minLength(14)]],
-    });
+    this.cpfForm = this.homeFormService.createCpfForm();
   }
 
   handleInput() {
-    const rawValue = this.cpfForm.get('cpf').value || '';
-    const cleaned = rawValue.replace(/\D/g, '');
-
-    let masked = cleaned;
-    if (cleaned.length > 3) {
-      masked = cleaned.slice(0, 3) + '.' + cleaned.slice(3);
-    }
-    if (cleaned.length > 6) {
-      masked = masked.slice(0, 7) + '.' + cleaned.slice(6);
-    }
-    if (cleaned.length > 9) {
-      masked = masked.slice(0, 11) + '-' + cleaned.slice(9, 11);
-    }
-
+    let masked = applyMask(this.cpfForm.get('cpf').value || '');
     this.cpfForm.get('cpf').setValue(masked, { emitEvent: false });
   }
 
@@ -56,46 +55,13 @@ export class HomeComponent implements OnInit {
   }
 
   getErrorText(field: string) {
-    const formErrorMessages = {
-      required: 'Campo obrigatório.',
-      minlength: ({ requiredLength, actualLength }) =>
-        `Mínimo de ${requiredLength} caracteres. Você digitou ${actualLength}.`,
-
-      maxlength: ({ requiredLength, actualLength }) =>
-        `Máximo de ${requiredLength} caracteres. Você digitou ${actualLength}.`,
-      invalidCpfFormat: 'CPF no formato inválido. Use ###.###.###-##',
-      pattern: 'Formato inválido.',
-    };
-
-    if (this.showError) {
-      return 'Cooperado não encontrado';
-    }
-
-    const fieldControl = this.cpfForm.get(field);
-
-    if (fieldControl.errors && fieldControl.touched) {
-      const errors = fieldControl.errors;
-      const firstKey = Object.keys(errors)[0];
-      const errorValue = errors[firstKey];
-
-      const message = formErrorMessages[firstKey];
-      return typeof message === 'function' ? message(errorValue) : message;
-    }
-
-    return null;
+    return this.homeFormService.getErrorText(field, this.cpfForm, this.showError);
   }
 
-  markAllTouched() {
-    const formGroup = this.cpfForm;
-    Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-    });
-  }
-
-  searchCustomer() {
+  fetchCustomerByCpf() {
     const formControl = this.cpfForm;
     if (formControl.invalid) {
-      this.markAllTouched();
+      this.homeFormService.markAllTouched(formControl);
       return;
     }
 
@@ -126,16 +92,11 @@ export class HomeComponent implements OnInit {
   }
 
   get registrationStatus() {
-    const word = this.customer.registrationStatus;
-    return word ? word[0].toUpperCase() + word.slice(1).toLowerCase() : '';
+    if (!this.customer.registrationStatus) return '';
+    return RegistrationStatusLabels[this.customer.registrationStatus];
   }
 
   get registerStatusIcon() {
-    switch (this.customer.registrationStatus) {
-      case RegistrationStatus.REGULAR:
-        return { icon: 'check_circle_outline', color: '#00C246' };
-      case RegistrationStatus.IRREGULAR:
-        return { icon: 'cancel_outline', color: '#FF0000' };
-    }
+    return getStatusIcon(this.customer.registrationStatus);
   }
 }

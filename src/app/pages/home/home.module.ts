@@ -7,9 +7,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { LayoutModule } from '../../layout/layout.module';
+import { HomeFormService } from './home-form.service';
 
 @NgModule({
   declarations: [HomeComponent],
+  providers: [HomeFormService],
   imports: [
     CommonModule,
     HomeRoutingModule,

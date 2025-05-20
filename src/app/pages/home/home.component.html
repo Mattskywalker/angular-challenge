@@ -1,5 +1,7 @@
 <layout>
-  <ailos-stepper></ailos-stepper>
+  <div class="stepper-container">
+    <ailos-stepper [currentStep]="currentStep" [stepList]="stepList"></ailos-stepper>
+  </div>
   <ailos-label
     class="title"
     subtitle="Se necessário, você poderá duplicar uma conta existente ou pausar e retomar este cadastro futuramente.
@@ -7,7 +9,7 @@
   >
     Informe o CPF do futuro cooperado (a)
   </ailos-label>
-  <form class="search-form" [formGroup]="cpfForm" (ngSubmit)="searchCustomer()">
+  <form class="search-form" [formGroup]="cpfForm" (ngSubmit)="fetchCustomerByCpf()">
     <ailos-input
       (input)="handleInput()"
       [style]="{ width: '270px' }"
@@ -18,7 +20,9 @@
       [error]="(cpfForm.get('cpf').invalid && cpfForm.get('cpf').touched) || showError"
       [auxiliaryText]="getErrorText('cpf')"
     ></ailos-input>
-    <ailos-button size="p" type="submit" [loading]="loading">Buscar </ailos-button>
+    <ailos-button size="p" type="submit" [loading]="loading"
+      >Consultar por CPF</ailos-button
+    >
   </form>
 
   <div *ngIf="customer" class="card-container">
@@ -49,7 +53,7 @@
         label="Número da conta"
       ></info-item>
 
-      <Button class="tertiary p">Duplicar conta</Button>
+      <ailos-button variant="tertiary">Duplicar conta</ailos-button>
     </simple-card>
   </div>
 </layout>
