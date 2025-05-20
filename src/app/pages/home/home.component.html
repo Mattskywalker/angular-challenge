@@ -1,16 +1,20 @@
 <layout>
-  <div>
-    <input placeholder="pesquisar CPF" [(ngModel)]="inputCpf" />
-    <button (click)="searchCustomer()">Buscar</button>
-  </div>
-  <p *ngIf="showError" class="error-caption">Cooperado não encontrado</p>
+  <form class="search-form" [formGroup]="cpfForm" (ngSubmit)="searchCustomer()">
+    <ailos-input
+      (input)="handleInput()"
+      [style]="{ width: '270px' }"
+      [maxLength]="14"
+      label="CPF"
+      placeholder="Pequisar CPF"
+      formControlName="cpf"
+      [error]="(cpfForm.get('cpf').invalid && cpfForm.get('cpf').touched) || showError"
+      [auxiliaryText]="getErrorText('cpf')"
+    ></ailos-input>
+    <ailos-button type="submit" [loading]="loading">Buscar </ailos-button>
+  </form>
 
-  <div class="card-container">
-    <simple-card
-      *ngIf="customer"
-      title="Situação cadastral do CPF"
-      subtitle="Consulta na receita federal"
-    >
+  <div *ngIf="customer" class="card-container">
+    <simple-card title="Situação cadastral do CPF" subtitle="Consulta na receita federal">
       <info-item
         icon="person"
         iconColor="#889499"

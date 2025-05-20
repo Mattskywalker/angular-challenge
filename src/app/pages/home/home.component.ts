@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService, Customer } from 'src/app/core/services/customer.service';
-
-const cpf = '881.628.750-00';
+import { finalize } from 'rxjs/operators';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -10,33 +10,108 @@ const cpf = '881.628.750-00';
 })
 export class HomeComponent implements OnInit {
   customer: Customer;
-  inputCpf: string = '';
 
   showError: boolean = false;
+  loading: boolean = false;
 
-  constructor(private customerService: CustomerService) {}
+  cpfForm: FormGroup;
+
+  constructor(
+    private customerService: CustomerService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
-    this.searchCustomer();
-    console.log(this.customer);
+    this.cpfForm = this.formBuilder.group({
+      cpf: ['', [Validators.required, Validators.minLength(14)]],
+    });
+  }
+
+  handleInput() {
+    const rawValue = this.cpfForm.get('cpf').value || '';
+    const cleaned = rawValue.replace(/\D/g, '');
+
+    let masked = cleaned;
+    if (cleaned.length > 3) {
+      masked = cleaned.slice(0, 3) + '.' + cleaned.slice(3);
+    }
+    if (cleaned.length > 6) {
+      masked = masked.slice(0, 7) + '.' + cleaned.slice(6);
+    }
+    if (cleaned.length > 9) {
+      masked = masked.slice(0, 11) + '-' + cleaned.slice(9, 11);
+    }
+
+    this.cpfForm.get('cpf').setValue(masked, { emitEvent: false });
   }
 
   clearInput() {
-    this.inputCpf = '';
+    this.cpfForm.reset();
+  }
+
+  getErrorText(field: string) {
+    const formErrorMessages = {
+      required: 'Campo obrigatório.',
+      minlength: ({ requiredLength, actualLength }) =>
+        `Mínimo de ${requiredLength} caracteres. Você digitou ${actualLength}.`,
+
+      maxlength: ({ requiredLength, actualLength }) =>
+        `Máximo de ${requiredLength} caracteres. Você digitou ${actualLength}.`,
+      invalidCpfFormat: 'CPF no formato inválido. Use ###.###.###-##',
+      pattern: 'Formato inválido.',
+    };
+
+    if (this.showError) {
+      return 'Cooperado não encontrado';
+    }
+
+    const fieldControl = this.cpfForm.get(field);
+
+    if (fieldControl.errors && fieldControl.touched) {
+      const errors = fieldControl.errors;
+      const firstKey = Object.keys(errors)[0];
+      const errorValue = errors[firstKey];
+
+      const message = formErrorMessages[firstKey];
+      return typeof message === 'function' ? message(errorValue) : message;
+    }
+
+    return null;
+  }
+
+  markAllTouched() {
+    const formGroup = this.cpfForm;
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+    });
   }
 
   searchCustomer() {
-    this.customerService.getCostumer(cpf).subscribe({
-      next: (customer) => {
-        this.customer = customer;
-        this.showError = false;
-      },
-      error: (e) => {
-        console.error('Erro ', e);
-        this.showError = true;
-        this.clearInput();
-      },
-    });
+    const formControl = this.cpfForm;
+    if (formControl.invalid) {
+      this.markAllTouched();
+      return;
+    }
+
+    this.loading = true;
+    this.customerService
+      .getCostumer(formControl.value.cpf)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: (customer) => {
+          this.customer = customer;
+          this.showError = false;
+        },
+        error: (e) => {
+          console.error('Erro ', e);
+          this.showError = true;
+          this.clearInput();
+        },
+      });
   }
 
   getAccountLabel(label: string) {
