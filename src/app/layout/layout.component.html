@@ -1,27 +1,10 @@
 <div class="page-container">
-  <nav class="menu">
-    <div class="logo-container">
-      <img src="../../assets/icons/ailos-logo.svg" width="60px" />
-    </div>
-
-    <button class="burger-button">
-      <mat-icon class="burger material-icons-round">menu</mat-icon>
-    </button>
-
-    <button *ngFor="let icon of iconList" class="menu-button">
-      <mat-icon class="icon material-icons-round">{{ icon }}</mat-icon>
-    </button>
-  </nav>
+  <ailos-navbar></ailos-navbar>
   <section>
     <ailos-header></ailos-header>
     <main>
       <ng-content></ng-content>
     </main>
-    <footer>
-      <ailos-button *ngIf="customer" variant="primary"
-        >Iniciar nova admissão</ailos-button
-      >
-      <ailos-button variant="secondary">Dicas para abertura de conta</ailos-button>
-    </footer>
+    <ailos-footer></ailos-footer>
   </section>
 </div>

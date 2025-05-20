@@ -3,48 +3,11 @@
 $icon_size: 25px;
 $burguer_icon_size: 25px;
 
-.burger-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2.2rem;
-}
-
-.burger {
-  font-size: burguer_icon_size;
-  height: 20px;
-  width: burguer_icon_size;
-  color: $ailos_blue_60;
-}
-
-.icon {
-  color: white;
-  font-size: icon_size;
-  height: icon_size;
-  width: icon_size;
-}
-
-.logo-container {
-  display: flex;
-  width: 100%;
-  height: 10rem;
-  justify-content: center;
-  align-items: center;
-}
-
 .page-container {
   display: flex;
   flex-direction: row;
   height: 100%;
   width: 100%;
-}
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  background-color: $ailos_blue;
-  width: 10rem;
-  align-items: center;
 }
 
 section {
@@ -56,14 +19,4 @@ section {
 main {
   height: 100%;
   padding: 0 2.6rem 2.6rem 2.6rem;
-}
-
-footer {
-  display: flex;
-  gap: 1.6rem;
-  align-items: center;
-  padding-left: 2.6rem;
-  background-color: white;
-  width: 100%;
-  height: 7.8rem;
 }
