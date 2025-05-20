@@ -5,6 +5,8 @@ import { SimpleCardComponent } from './components/simple-card/simple-card.compon
 import { MatIconModule } from '@angular/material';
 import { InfoItemComponent } from './components/info-item/info-item.component';
 import { ButtonComponent } from './components/button/button.component';
+import { LabelComponent } from './components/label/label.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,17 @@ import { ButtonComponent } from './components/button/button.component';
     InfoItemComponent,
     InputComponent,
     ButtonComponent,
+    LabelComponent,
+    StepperComponent,
   ],
   imports: [CommonModule, MatIconModule],
-  exports: [SimpleCardComponent, InfoItemComponent, InputComponent, ButtonComponent],
+  exports: [
+    SimpleCardComponent,
+    InfoItemComponent,
+    InputComponent,
+    ButtonComponent,
+    LabelComponent,
+    StepperComponent,
+  ],
 })
 export class SharedModule {}
