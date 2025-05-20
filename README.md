@@ -1,27 +1,50 @@
 # AngularChallenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.10.
+Angular 7
 
-## Development server
+na primeira página teremos um formulário para consulta de CPF, essa consulta
+deverá ter a possibilidade de dois caminhos, o de insucesso, onde o CPF inserido não é valido, gerando uma mensagem de erro na tela, e o feliz, onde
+o CPF é localizado e o usuário direcionado a tela dois. Na “tela dois”, após ser inserido um CPF válido no formulário, deverá carregar os dados do cooperado.
+Importante seguir o modelo de interface que segue abaixo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Caminho de insucesso (Caminho infeliz) 😢
 
-## Code scaffolding
+Escrever um CPF Invalido no campo, por exemplo: 111.111.111-11
+deverá receber uma mensagem de CPF não é válido
+assim como outras mensagens de validação, required, lenght.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Escrever um CPF Válido mas o mesmo não existir na base de Dados
+deverá receber uma mensagem de "Coperado não encontrado."
 
-## Build
+## Caminho de sucesso (Caminho feliz) 😄
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Escrever um CPF válido no campo que esteja cadastrado na base de dados
+438.265.920-50 - EU 😄
+881.628.750-00 - Mariane de Souza Oliveira (que tava na tela)
 
-## Running unit tests
+assim o resultado esperado é que renderize os dados do cooperado e as contas conforme as telas do figma
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Como rodar???
 
-## Running end-to-end tests
+Estou usando angular 7, e Node para a api, tudo ta rodando com a versão `v16.20.2` do node
+Achei que seria interessante ter uma API para consumo de dados, coloquei aqui mesmo dentro do projeto, para facilitar
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Para inciar a api basta rodar `npm run start-api` só basta isso, já vai instalar as dependencias e funcionar normal
+A api roda na `http://localhost:3000`
 
-## Further help
+Para iniciar o front basta rodar o `ng serve`
+o endereço é o `http://localhost:4200/` redirecionei todas as rotas para a `home`
+só entrar que ja vai para a tela inicial
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Problemas ⚠️⚠️⚠️⚠️⚠️
+
+Não cosnegui os icones da barra de navegação e alguns icones que estão na tela do desafio
+então usei o material icons mesmo
+
+não consegui rodar os testes, acredito que seja por
+algum B.O de incompatibilidade de versões do karma webpack e do jasmine
+
+## Observações
+
+muitos itens estão na tela para seguir o design, os botões de notificação, da barra de navegação... ETC
+mas quanto a todo fluxo de CPF que foi pedido no desafio ta 100% ✅
