@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { validateCPF } from 'src/app/core/utils/cpfUtil';
 
 @Injectable()
 export class HomeFormService {
   constructor(private formBuilder: FormBuilder) {}
 
+  validatorCPF(control: AbstractControl): ValidationErrors | null {
+    const result = validateCPF(control.value) ? null : { invalidCPF: true };
+
+    return result;
+  }
+
   createCpfForm() {
     return this.formBuilder.group({
-      cpf: ['', [Validators.required, Validators.minLength(14)]],
+      cpf: ['', [Validators.required, Validators.minLength(14), this.validatorCPF]],
     });
   }
 
@@ -34,6 +47,16 @@ export class HomeFormService {
     }
 
     const fieldControl = formBuilder.get(field);
+    const CPF_LENGTH = 14;
+
+    if (
+      !!fieldControl.errors &&
+      fieldControl.errors.invalidCPF &&
+      String(fieldControl.value).length === CPF_LENGTH
+    ) {
+      this.markAllTouched(formBuilder);
+      return 'o CPF digitado não é válido';
+    }
 
     if (fieldControl.errors && fieldControl.touched) {
       const errors = fieldControl.errors;
