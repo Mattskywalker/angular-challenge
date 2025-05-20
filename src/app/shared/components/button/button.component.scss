@@ -1,0 +1,30 @@
+.hidden {
+  visibility: hidden;
+}
+
+.main-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spiner-rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spiner {
+  position: absolute;
+}
+
+.spiner-animation {
+  animation-name: spiner-rotation;
+  animation-duration: 1.2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

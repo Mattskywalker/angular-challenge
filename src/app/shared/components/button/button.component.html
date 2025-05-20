@@ -1,0 +1,9 @@
+<ng-container>
+  <button #buttonRef class="primary p main-button" [type]="type">
+    <p [ngClass]="{ hidden: loading }"><ng-content></ng-content></p>
+    <img
+      [ngClass]="{ spiner: true, hidden: !loading, 'spiner-animation': loading }"
+      src="../../../../assets/icons/spiner.svg"
+    />
+  </button>
+</ng-container>
