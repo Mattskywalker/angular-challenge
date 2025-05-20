@@ -4,7 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CustomerDataService } from 'src/app/core/services/customer-data.service';
 import { StepProps } from 'src/app/shared/components/stepper/stepper.component';
-import { HomeFormService } from './home-form.service';
+import { HomeFormService } from './services/home-form.service';
 import { applyMask } from 'src/app/core/utils/cpfUtil';
 import {
   getStatusIcon,

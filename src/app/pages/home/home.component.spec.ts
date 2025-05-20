@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
-import { HomeFormService } from './home-form.service';
+import { HomeFormService } from './services/home-form.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
