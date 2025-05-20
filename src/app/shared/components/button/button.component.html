@@ -1,5 +1,5 @@
 <ng-container>
-  <button #buttonRef class="primary p main-button" [type]="type">
+  <button #buttonRef [class]="className" [type]="type">
     <p [ngClass]="{ hidden: loading }"><ng-content></ng-content></p>
     <img
       [ngClass]="{ spiner: true, hidden: !loading, 'spiner-animation': loading }"

@@ -42,6 +42,38 @@
   }
 }
 
+.secondary {
+  cursor: pointer;
+  font-family: 'OpenSans', sans-serif;
+  font-size: 1.4rem;
+  line-height: 100%;
+  color: $ailos_blue;
+  font-weight: 600;
+  width: fit-content;
+  height: 3.2rem;
+  border-radius: 0.2rem;
+  border: 1px solid $ailos_blue;
+
+  &:focus {
+    border: 1px solid $ailos-light-blue;
+    border-radius: 0.2rem;
+  }
+
+  &:disabled {
+    border: none;
+  }
+
+  &:active {
+    background-color: $light_gray !important;
+    border-color: $ailos_blue_120;
+  }
+
+  &:hover {
+    background-color: $dark_white;
+    border: 1px solid $ailos_blue_dark;
+  }
+}
+
 .tertiary {
   cursor: pointer;
   font-family: 'OpenSans', sans-serif;
@@ -74,4 +106,10 @@
 .p {
   padding-left: 1.6rem;
   padding-right: 1.6rem;
+}
+
+.m {
+  height: 48px;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
 }

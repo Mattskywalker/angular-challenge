@@ -10,7 +10,7 @@
       [error]="(cpfForm.get('cpf').invalid && cpfForm.get('cpf').touched) || showError"
       [auxiliaryText]="getErrorText('cpf')"
     ></ailos-input>
-    <ailos-button type="submit" [loading]="loading">Buscar </ailos-button>
+    <ailos-button size="p" type="submit" [loading]="loading">Buscar </ailos-button>
   </form>
 
   <div *ngIf="customer" class="card-container">

@@ -22,8 +22,14 @@ export class ButtonComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() loading = false;
   @Input() type: 'submit' | 'button' | 'reset' = 'button';
+  @Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() size: 'p' | 'm' = 'm';
+
+  className: string;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.className = `${this.variant} ${this.size}`;
+  }
 }
