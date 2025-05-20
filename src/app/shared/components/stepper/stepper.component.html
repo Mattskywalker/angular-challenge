@@ -1,1 +1,27 @@
-<div class="steper-container">steps</div>
+<div class="container">
+  <div *ngFor="let step of stepList; let i = index" class="step-cube">
+    <div class="circle-container">
+      <div class="first-line"></div>
+      <div
+        [ngClass]="{
+          'step-circle': true,
+          current: currentStep === i + 1,
+          future: currentStep < i + 1,
+          completed: currentStep > i + 1
+        }"
+      ></div>
+      <div class="second-line"></div>
+    </div>
+    <div class="label-container">
+      <p
+        [ngClass]="{
+          'step-label': true,
+          label: true,
+          'future-label': currentStep < i + 1
+        }"
+      >
+        {{ step.label }}
+      </p>
+    </div>
+  </div>
+</div>
