@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService, Customer } from 'src/app/core/services/customer.service';
+import {
+  CustomerService,
+  Customer,
+  RegistrationStatus,
+} from 'src/app/core/services/customer.service';
 import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CustomerDataService } from 'src/app/core/services/customer-data.service';
@@ -124,5 +128,14 @@ export class HomeComponent implements OnInit {
   get registrationStatus() {
     const word = this.customer.registrationStatus;
     return word ? word[0].toUpperCase() + word.slice(1).toLowerCase() : '';
+  }
+
+  get registerStatusIcon() {
+    switch (this.customer.registrationStatus) {
+      case RegistrationStatus.REGULAR:
+        return { icon: 'check_circle_outline', color: '#00C246' };
+      case RegistrationStatus.IRREGULAR:
+        return { icon: 'cancel_outline', color: '#FF0000' };
+    }
   }
 }

@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-enum RegistrationStatus {
+export enum RegistrationStatus {
   REGULAR = 'REGULAR',
   PENDING = 'PENDING',
   SUSPENDED = 'SUSPENDED',
   CANCELLED = 'CANCELLED',
+  IRREGULAR = 'IRREGULAR',
 }
 
 enum CostumerAccountType {
