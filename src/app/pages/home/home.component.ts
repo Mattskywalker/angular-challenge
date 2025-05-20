@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService, Customer } from 'src/app/core/services/customer.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CustomerDataService } from 'src/app/core/services/customer-data.service';
 import { StepProps } from 'src/app/shared/components/stepper/stepper.component';
@@ -10,6 +10,7 @@ import {
   getStatusIcon,
   RegistrationStatusLabels,
 } from 'src/app/core/utils/accountStatusUtil';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ import {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  private destroy$ = new Subject<void>();
+
   customer: Customer;
 
   stepList: StepProps[];
@@ -39,10 +42,23 @@ export class HomeComponent implements OnInit {
       { label: 'Dados cadastrais' },
       { label: 'Admissão' },
     ];
+
+    this.customerDataService.currentCustomerData
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (customerData) => {
+          this.customer = customerData;
+        },
+      });
   }
 
   ngOnInit() {
     this.cpfForm = this.homeFormService.createCpfForm();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   handleInput() {
@@ -65,6 +81,8 @@ export class HomeComponent implements OnInit {
       return;
     }
 
+    this.customerDataService.clearData();
+
     this.loading = true;
     this.customerService
       .getCostumer(formControl.value.cpf)
@@ -75,7 +93,6 @@ export class HomeComponent implements OnInit {
       )
       .subscribe({
         next: (customer) => {
-          this.customer = customer;
           this.showError = false;
           this.customerDataService.updateData(customer);
         },
